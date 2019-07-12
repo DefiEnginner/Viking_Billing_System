@@ -1,3 +1,25 @@
 {
-    "editor.formatOnSave": true
+	"window.zoomLevel": 1,
+	"terminal.integrated.shell.osx": "/bin/zsh",
+	"explorer.confirmDragAndDrop": false,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"explorer.confirmDelete": false,
+	"editor.detectIndentation": false,
+	"editor.foldingStrategy": "indentation",
+	"material-icon-theme.activeIconPack": "react_redux",
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"breadcrumbs.enabled": true,
+	"liveServer.settings.donotShowInfoMsg": true,
+	"python.jediEnabled": false,
+	"workbench.iconTheme": "material-icon-theme",
+	"vetur.format.options.tabSize": 4,
+	"prettier.tabWidth": 4,
+	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"prettier.printWidth": 120,
+	"vetur.format.defaultFormatter.ts": "vscode-typescript",
+	"editor.insertSpaces": false,
+	"prettier.jsxSingleQuote": true,
+	"prettier.useTabs": true,
+	"workbench.statusBar.feedback.visible": false
 }
