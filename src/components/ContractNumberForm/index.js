@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
-class ForgotPasswordForm extends React.Component {
+class ContractNumberForm extends React.Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		this.props.form.validateFields((err, values) => {
@@ -16,52 +16,44 @@ class ForgotPasswordForm extends React.Component {
 
 	render() {
 		const { getFieldDecorator } = this.props.form;
+		const { temp } = this.props;
 		return (
 			<Form onSubmit={this.handleSubmit} className='login-form'>
 				<Row>
 					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "10%" }}>
 						<img src='images/logo_viking_dark.svg' alt='logo' />
 					</Row>
-					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "0%" }}>
-						<Title level={3} strong={true}>
-							<Text>Forgottten Password ?</Text>
+
+					<Row type='flex' justify='center' align='middle'>
+						<Title level={2}>
+							<Text>Sign Up</Text>
 						</Title>
 					</Row>
 
-					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "10%" }}>
-						<Text>Enter your email to reset your password:</Text>
+					<Row type='flex' justify='center' align='middle'>
+						<Text>Enter your contract number to continue</Text>
 					</Row>
+					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "10%" }}>
+						<Text>create your account:</Text>
+					</Row>
+
 					<Row>
 						<Form.Item>
-							{getFieldDecorator("email", {
-								rules: [{ required: true, message: "Please input your email!" }]
-							})(
-								<Input
-									size='large'
-									prefix={<Icon type='user' style={{ color: "rgba(0,0,0,.25)" }} />}
-									placeholder='Email'
-								/>
-							)}
+							{getFieldDecorator("contractNumber", {
+								rules: [{ required: true, message: "Please input your contract number!" }]
+							})(<Input size='large' placeholder='contractNumber' />)}
 						</Form.Item>
 					</Row>
 
 					<Row>
 						<Form.Item>
 							<Row type='flex' justify='center' style={{ marginBottom: "10%" }}>
-								<Link to='/signin' style={{ marginLeft: "5%", fontWeight: "bold" }}>
-									<Button type='primary' size='large' htmlType='submit'>
-										Request
-									</Button>
-								</Link>
+								<Button type='primary' size='large' htmlType='submit'>
+									Continue
+								</Button>
 
 								<Link to='/signin' style={{ marginLeft: "5%", fontWeight: "bold" }}>
 									<Button size='large'>Cancel</Button>
-								</Link>
-							</Row>
-							<Row type='flex' justify='center' align='middle'>
-								Don't have an account yet?
-								<Link to='/signup' style={{ marginLeft: "5%", fontWeight: "bold" }}>
-									Sign Up!
 								</Link>
 							</Row>
 						</Form.Item>
@@ -72,4 +64,4 @@ class ForgotPasswordForm extends React.Component {
 	}
 }
 
-export default Form.create({ name: "forgotpassword" })(ForgotPasswordForm);
+export default Form.create({ name: "forgotpassword" })(ContractNumberForm);
