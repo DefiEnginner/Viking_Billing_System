@@ -25,22 +25,33 @@ class SignUpForm extends React.Component {
 					</Row>
 
 					<Row type='flex' justify='center' align='middle'>
-						<Title level={2}>
+						<Title level={4}>
 							<Text>Sign Up</Text>
 						</Title>
 					</Row>
 
-					<Row type='flex' justify='center' align='middle'>
-						<Text>Enter your contract number to continue</Text>
-					</Row>
 					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "10%" }}>
-						<Text>create your account:</Text>
+						<Text>Enter your details to create your account: </Text>
+					</Row>
+
+					<Row type='flex' gutter={10}>
+						<Col span={9}>Contract number:</Col>
+						<Col>
+							<Text>34953745234 </Text>
+						</Col>
+					</Row>
+
+					<Row type='flex' gutter={10} style={{ marginBottom: "5%" }}>
+						<Col span={9}>Company name:</Col>
+						<Col>
+							<Text>Viking</Text>
+						</Col>
 					</Row>
 
 					<Row>
 						<Form.Item>
 							{getFieldDecorator("email", {
-								rules: [{ required: true, message: "Please input your Email address!" }]
+								rules: [{ type: "email", required: true, message: "Please input your Email address!" }]
 							})(<Input size='large' placeholder='Email Address' />)}
 						</Form.Item>
 					</Row>
@@ -70,7 +81,9 @@ class SignUpForm extends React.Component {
 					</Row>
 
 					<Row>
-						<a>Address</a>
+						<Row style={{ marginBottom: "10px" }}>
+							<Text>Address</Text>
+						</Row>
 						<Form.Item>
 							{getFieldDecorator("address", {
 								rules: [{ required: true, message: "Please input your address!" }]
@@ -120,7 +133,9 @@ class SignUpForm extends React.Component {
 										initialValue: true
 									})(<Checkbox>I agree with the</Checkbox>)}
 								</Col>
-								<a style={{ fontWeight: "bold" }}>terms and conditions</a>
+								<Link to='/signin' style={{ fontWeight: "bold" }}>
+									<Text style={{ fontWeight: "bold" }}>terms and conditions</Text>
+								</Link>
 							</Row>
 							<Row type='flex' justify='center' style={{ marginBottom: "10%" }}>
 								<Button type='primary' size='large' htmlType='submit'>

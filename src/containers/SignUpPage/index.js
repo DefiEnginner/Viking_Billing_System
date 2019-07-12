@@ -30,7 +30,7 @@ class SignUpPage extends Component {
 
 		return (
 			<Row type='flex' justify='center' align='middle' style={{ height: "100%" }}>
-				<Col xs={20} sm={14} md={9} lg={8} xl={7} xxl={6}>
+				<Col xs={20} sm={16} md={14} lg={10} xl={8} xxl={7}>
 					{!isContractNumber && <ContractNumberForm temp={this.onFinishInputContractNumber} />}
 					{isContractNumber && <SignUpForm />}
 				</Col>

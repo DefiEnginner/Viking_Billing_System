@@ -7,8 +7,11 @@ const { Title, Text } = Typography;
 class ContractNumberForm extends React.Component {
 	handleSubmit = e => {
 		e.preventDefault();
+
 		this.props.form.validateFields((err, values) => {
 			if (!err) {
+				const { temp } = this.props;
+				temp();
 				console.log("Received values of form: ", values);
 			}
 		});
@@ -16,7 +19,7 @@ class ContractNumberForm extends React.Component {
 
 	render() {
 		const { getFieldDecorator } = this.props.form;
-		const { temp } = this.props;
+
 		return (
 			<Form onSubmit={this.handleSubmit} className='login-form'>
 				<Row>

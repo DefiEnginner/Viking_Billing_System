@@ -34,14 +34,8 @@ class ForgotPasswordForm extends React.Component {
 					<Row>
 						<Form.Item>
 							{getFieldDecorator("email", {
-								rules: [{ required: true, message: "Please input your email!" }]
-							})(
-								<Input
-									size='large'
-									prefix={<Icon type='user' style={{ color: "rgba(0,0,0,.25)" }} />}
-									placeholder='Email'
-								/>
-							)}
+								rules: [{ type: "email", required: true, message: "Please input your email!" }]
+							})(<Input size='large' placeholder='Email' />)}
 						</Form.Item>
 					</Row>
 

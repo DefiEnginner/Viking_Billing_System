@@ -25,15 +25,9 @@ class SignInForm extends React.Component {
 
 					<Row>
 						<Form.Item>
-							{getFieldDecorator("username", {
-								rules: [{ required: true, message: "Please input your username!" }]
-							})(
-								<Input
-									size='large'
-									prefix={<Icon type='user' style={{ color: "rgba(0,0,0,.25)" }} />}
-									placeholder='Username'
-								/>
-							)}
+							{getFieldDecorator("email", {
+								rules: [{ type: "email", required: true, message: "Please input your email!" }]
+							})(<Input size='large' placeholder='Email' />)}
 						</Form.Item>
 					</Row>
 
@@ -41,14 +35,7 @@ class SignInForm extends React.Component {
 						<Form.Item>
 							{getFieldDecorator("password", {
 								rules: [{ required: true, message: "Please input your Password!" }]
-							})(
-								<Input
-									size='large'
-									prefix={<Icon type='lock' style={{ color: "rgba(0,0,0,.25)" }} />}
-									type='password'
-									placeholder='Password'
-								/>
-							)}
+							})(<Input size='large' type='password' placeholder='Password' />)}
 						</Form.Item>
 					</Row>
 
@@ -58,7 +45,7 @@ class SignInForm extends React.Component {
 								<Col>
 									{getFieldDecorator("remember", {
 										valuePropName: "checked",
-										initialValue: true
+										initialValue: false
 									})(<Checkbox>Remember me</Checkbox>)}
 								</Col>
 								<Col>
