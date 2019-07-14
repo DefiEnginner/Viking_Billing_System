@@ -1,6 +1,7 @@
 import SignInPage from "./containers/SignInPage";
 import ForgotPasswordPage from "./containers/ForgotPasswordPage";
 import SignUpPage from "./containers/SignUpPage";
+import ProductsListPage from "./containers/ProductsListPage";
 import Base from "./containers/MainLayout";
 
 const routes = [
@@ -23,6 +24,11 @@ const routes = [
 		path: "/",
 		exact: true,
 		component: Base(SignInPage)
+	},
+	{
+		path: "/products-list",
+		exact: true,
+		component: Base(ProductsListPage)
 	}
 ];
 
