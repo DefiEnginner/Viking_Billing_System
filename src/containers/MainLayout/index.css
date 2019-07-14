@@ -1,0 +1,22 @@
+.logo {
+	height: 60px;
+	margin-bottom: 10px;
+	margin-left: -10px;
+	margin-right: 70px;
+	display: inline-block;
+}
+
+.antmenu {
+	background-color: transparent !important;
+	margin-top: 15px !important;
+	display: inline-block;
+}
+
+.header {
+	background: white !important;
+	height: 80px;
+}
+
+.layout {
+	height: 100vh;
+}

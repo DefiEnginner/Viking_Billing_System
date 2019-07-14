@@ -10,13 +10,15 @@ class SignUpForm extends React.Component {
 		this.props.form.validateFields((err, values) => {
 			if (!err) {
 				console.log("Received values of form: ", values);
+			} else {
+				this.props.handleSubmit(values);
 			}
 		});
 	};
 
 	render() {
 		const { getFieldDecorator } = this.props.form;
-		const { temp } = this.props;
+		const { setCurrentPage } = this.props;
 		return (
 			<Form onSubmit={this.handleSubmit} className='login-form'>
 				<Row>
