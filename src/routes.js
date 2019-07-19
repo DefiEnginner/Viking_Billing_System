@@ -24,12 +24,12 @@ const routes = [
 	{
 		path: "/",
 		exact: true,
-		component: Base(DashboardPage)
+		component: Base(DashboardPage, true, 0)
 	},
 	{
 		path: "/products-list",
 		exact: true,
-		component: Base(ProductsListPage)
+		component: Base(ProductsListPage, true, 2)
 	}
 ];
 

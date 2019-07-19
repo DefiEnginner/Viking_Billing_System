@@ -84,6 +84,7 @@ class NestedTable extends React.Component {
 					rowClassName='editable-row'
 					pagination={{ pageSize: 7 }}
 					expandIcon={customExpandIcon}
+					rowKey='orderID'
 				/>
 			</div>
 		);

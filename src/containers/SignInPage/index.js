@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
 	auth: state.authentication
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = () => {
 	return {
 		requestSignIn
 	};

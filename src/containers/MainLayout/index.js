@@ -11,14 +11,11 @@ const { Header, Content } = Layout;
 /**
  * Base component
  */
-export default (WrappedComponent, isHeader = true) => {
+export default (WrappedComponent, isHeader = true, menuIndex = 0) => {
 	class MainLayout extends Component {
 		items = [
 			{
 				title: "Dashboard"
-			},
-			{
-				title: "Contracts list"
 			},
 			{
 				title: "Clients list"
@@ -31,20 +28,19 @@ export default (WrappedComponent, isHeader = true) => {
 			}
 		];
 
-		routes = ["/dashboard", "/contracts-list", "/clients-list", "products-list", "purchase-history"];
+		routes = ["/", "/clients-list", "products-list", "purchase-history"];
 
 		constructor(props) {
 			super(props);
-			this.state = {
-				selectedIndex: 0
-			};
+
+			this.onClickNavigation = this.onClickNavigation.bind(this);
 		}
+
 		onClickNavigation = ({ item, key, keyPath }) => {
-			if (this.state.selectedIndex + "" != keyPath) {
+			const numberKey = Number(keyPath[0]);
+			if (menuIndex !== numberKey) {
 				const { history } = this.props;
-				this.setState({ selectedIndex: keyPath });
-				console.log(this.routes[keyPath]);
-				history.push(this.routes[keyPath]);
+				history.push(this.routes[numberKey]);
 			}
 		};
 		render() {
@@ -52,13 +48,13 @@ export default (WrappedComponent, isHeader = true) => {
 				<Layout className='layout'>
 					<Header className='header'>
 						<div className='logo'>
-							<img style={{ height: "50px" }} src='images/logo_viking_dark.svg' alt='VSLOGO' />
+							<img style={{ height: "50px" }} src='images/logo.svg' alt='VSLOGO' />
 						</div>
 						<Menu
 							className='antmenu'
 							theme='light'
 							mode='horizontal'
-							selectedKeys={[this.state.selectedIndex + ""]}
+							selectedKeys={[menuIndex + ""]}
 							onClick={this.onClickNavigation}
 						>
 							{this.items.map((item, index) => (

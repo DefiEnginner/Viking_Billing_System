@@ -22,7 +22,7 @@ class ForgotPasswordForm extends React.Component {
 			<Form onSubmit={this.handleSubmit} className='login-form'>
 				<Row>
 					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "10%" }}>
-						<img src='images/logo_viking_dark.svg' alt='logo' />
+						<img src='images/logo.svg' alt='logo' />
 					</Row>
 					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "0%" }}>
 						<Title level={3} strong={true}>

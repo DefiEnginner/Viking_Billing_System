@@ -26,12 +26,11 @@ class SignUpForm extends React.Component {
 
 	render() {
 		const { getFieldDecorator } = this.props.form;
-		const { temp } = this.props;
 		return (
 			<Form onSubmit={this.handleSubmit} className='login-form'>
 				<Row>
 					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "10%" }}>
-						<img src='images/logo_viking_dark.svg' alt='logo' />
+						<img src='images/logo.svg' alt='logo' />
 					</Row>
 
 					<Row type='flex' justify='center' align='middle'>
