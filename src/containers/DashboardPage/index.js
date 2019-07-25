@@ -2,7 +2,11 @@ import React from "react";
 import DashboardTable from "../../components/DashboardTable";
 import { roles } from "../../utils";
 import orderData from "./orderData";
+import InoviceModal from "../../components/InvoiceModal";
+import { Typography, Row, Menu } from "antd";
+
 const { SUPERADMIN, DISTRIBUTOR, CUSTOMER } = roles;
+const { Text } = Typography;
 
 class DashboardPage extends React.Component {
 	static defaultProps = {
@@ -106,7 +110,18 @@ class DashboardPage extends React.Component {
 			key: "totalPrice"
 		}
 	];
+	constructor(props) {
+		super(props);
+		this.state = {
+			invoiceIndex: -1
+		};
+	}
+	setInvoiceIndex = orderID => {
+		const invoiceIndex = orderID ? this.props.orderData.findIndex(order => order.orderID === orderID) : -1;
+		this.setState({ invoiceIndex });
+	};
 	render() {
+		const { invoiceIndex } = this.state;
 		const { role } = this.props;
 		const columns = this.columns.slice(0);
 		const innerColumns = this.innerColumns.slice(0);
@@ -130,7 +145,26 @@ class DashboardPage extends React.Component {
 			innerColumns,
 			data: this.props.orderData
 		};
-		return <DashboardTable {...params} />;
+		return invoiceIndex === -1 ? (
+			<div>
+				<Row style={{ marginBottom: "20px" }}>
+					<Menu mode='horizontal' selectedKeys={["0"]}>
+						<Menu.Item key='0'>
+							<Text style={{ marginLeft: "20px" }} strong>
+								Purchase Order
+							</Text>
+						</Menu.Item>
+					</Menu>
+				</Row>
+				<DashboardTable {...params} setInvoiceIndex={this.setInvoiceIndex} />
+			</div>
+		) : (
+			<InoviceModal
+				{...this.props.orderData[invoiceIndex]}
+				setInvoiceIndex={this.setInvoiceIndex}
+				invoiceIndex={invoiceIndex}
+			/>
+		);
 	}
 }
 

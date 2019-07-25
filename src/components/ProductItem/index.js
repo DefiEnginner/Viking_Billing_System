@@ -1,17 +1,35 @@
 import React from "react";
 import { Card, Row, Col, Typography, Checkbox, Button } from "antd";
+import { roles } from "../../utils";
+import "./index.scss";
 
-import "./index.css";
+const { SUPERADMIN, DISTRIBUTOR, CUSTOMER } = roles;
 
 const { Text, Title, Paragraph } = Typography;
 class ProductItem extends React.Component {
+	editProduct = () => {
+		this.props.editProduct(this.props._id);
+	};
+	deleteProduct = () => {
+		this.props.deleteProduct(this.props._id);
+	};
 	render() {
+		const {
+			imageUrl,
+			productName,
+			dddLink,
+			description,
+			defaultRetail,
+			defaultWholeSale,
+			defaultUnits,
+			user
+		} = this.props;
 		return (
 			<Card>
 				<Row type='flex' justify='space-between'>
 					<Col xs={24} md={8} lg={8} xl={7} style={{ alignItems: "center" }}>
 						<img
-							src='images/Seed/item1.png'
+							src={imageUrl}
 							alt='Smiley face'
 							width='240'
 							height='240'
@@ -21,17 +39,14 @@ class ProductItem extends React.Component {
 					<Col xs={24} md={10} lg={12} xl={12}>
 						<Row>
 							<Title level={2}>
-								<Text>PRODUCT NAME</Text>
+								<Text>{productName}</Text>
 							</Title>
 						</Row>
 						<Row>
-							<a href='/'>Watch more on the DDD site</a>
+							<a href={dddLink}>Watch more on the DDD site</a>
 						</Row>
 						<Row>
-							<Paragraph>
-								Introducing the Flexes Q5. Specially built for remote off-grid scada applications
-								requiring extreme robustness. Low power consumption and eas of use
-							</Paragraph>
+							<Paragraph>{description}</Paragraph>
 						</Row>
 						<Row type='flex' justify='space-around'>
 							<Col>
@@ -42,7 +57,7 @@ class ProductItem extends React.Component {
 								</Row>
 								<Row>
 									<Title level={3}>
-										<Text>$80</Text>
+										<Text>{`$${defaultRetail}`}</Text>
 									</Title>
 									1 unit
 								</Row>
@@ -54,31 +69,48 @@ class ProductItem extends React.Component {
 
 								<Row>
 									<Title level={3}>
-										<Text>$60</Text>
+										<Text>{`$${defaultWholeSale}`}</Text>
 									</Title>
-									10 units or more
+									{`${defaultUnits}`} units or more
 								</Row>
 							</Col>
 						</Row>
 					</Col>
 					<Col xs={24} md={6} lg={4} xl={5}>
-						<Row>
+						{user && user.role !== CUSTOMER && (
 							<Row>
-								<Checkbox>Not available now</Checkbox>
+								<Row>
+									<Checkbox>Not available now</Checkbox>
+								</Row>
+								{user.role === DISTRIBUTOR && (
+									<Row>
+										<Checkbox>Do not show</Checkbox>
+									</Row>
+								)}
 							</Row>
-							<Row>
-								<Checkbox>Do not show</Checkbox>
-							</Row>
-						</Row>
-						<Row style={{ marginTop: "calc(100% - 120px)" }}>
-							<Row>
-								<Button type='primary' block>
-									EDIT
-								</Button>
-							</Row>
-							<Row>
-								<Button block>DELETE</Button>
-							</Row>
+						)}
+						<Row className='action_buttons'>
+							{user && user.role !== CUSTOMER && (
+								<Row>
+									<Button type='primary' block onClick={this.editProduct}>
+										EDIT
+									</Button>
+								</Row>
+							)}
+							{user && user.role === SUPERADMIN && (
+								<Row>
+									<Button block onClick={this.deleteProduct}>
+										DELETE
+									</Button>
+								</Row>
+							)}
+							{user && user.role === CUSTOMER && (
+								<Row>
+									<Button block onClick={this.addToCart} type='primary'>
+										Add TO CART
+									</Button>
+								</Row>
+							)}
 						</Row>
 					</Col>
 				</Row>

@@ -1,25 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Table, Icon, Dropdown, Menu } from "antd";
+import { Table, Icon } from "antd";
 
 import "./index.scss";
 
-const customExpandIcon = props => {
-	return (
-		<a onClick={e => props.onExpand(props.record, e)}>
-			<Icon type={props.expanded ? "caret-down" : "caret-right"} />
-		</a>
-	);
-};
-
-class NestedTable extends React.Component {
-	actionMenu = (
-		<Menu>
-			<Menu.Item key='0'>Export PDF</Menu.Item>
-			<Menu.Item key='1'>Export Excel</Menu.Item>
-			<Menu.Item key='3'>Print</Menu.Item>
-		</Menu>
-	);
+class ClientTable extends React.Component {
 	actionColumn = {
 		title: "Actions",
 		align: "center",
@@ -27,14 +12,12 @@ class NestedTable extends React.Component {
 		key: "actions",
 		render: (action, record) => (
 			<div>
-				<a onClick={() => this.props.setInvoiceIndex(record.orderID)}>
-					<Icon type='eye' className='eyeball' />
+				<a onClick={() => this.props.setIndex(record.email)}>
+					<Icon type='check-square' className='check-square' fill='rgba(50, 150, 255, 0.1)' />
 				</a>
-				<Dropdown overlay={this.actionMenu} trigger={["click"]}>
-					<a onClick={() => {}}>
-						<Icon type='ellipsis' />
-					</a>
-				</Dropdown>
+				<a onClick={() => this.props.archiveUser(record.email)}>
+					<Icon type='delete' fill='rgba(50, 150, 255, 0.1)' />
+				</a>
 			</div>
 		)
 	};
@@ -63,26 +46,18 @@ class NestedTable extends React.Component {
 	render() {
 		const columns = this.props.columns.slice();
 		columns.push(this.actionColumn);
-
-		const expandedRowRender = parentData => {
-			const data = parentData.innerData;
-			return <Table columns={this.props.innerColumns} dataSource={data} pagination={false} />;
-		};
-
 		return (
 			<div>
 				<Table
-					expandedRowRender={expandedRowRender}
 					dataSource={this.props.data}
 					columns={columns}
 					rowClassName='editable-row'
 					pagination={{ pageSize: 7 }}
-					expandIcon={customExpandIcon}
-					rowKey='orderID'
+					rowKey='email'
 				/>
 			</div>
 		);
 	}
 }
 
-export default NestedTable;
+export default ClientTable;

@@ -21,5 +21,6 @@
 	"editor.insertSpaces": false,
 	"prettier.jsxSingleQuote": true,
 	"prettier.useTabs": true,
-	"workbench.statusBar.feedback.visible": false
+	"workbench.statusBar.feedback.visible": false,
+	"editor.formatOnSave": true
 }

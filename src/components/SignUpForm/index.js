@@ -15,11 +15,34 @@ const FormField = (getFieldDecorator, valuename, message, placeholder) => (
 );
 
 class SignUpForm extends React.Component {
+	confirmPassword = (rule, value, cb) => {
+		const { form } = this.props;
+		if (value && value !== form.getFieldValue("password")) {
+			cb("Two passwords that you enter is inconsistent!");
+		} else {
+			cb();
+		}
+	};
+	confirmTerms = (rule, value, cb) => {
+		if (value) {
+			cb();
+		} else {
+			cb("This field is required");
+		}
+	};
+	isNumber = (rule, value, cb) => {
+		if (isNaN(value)) {
+			cb("This field should be number");
+		} else {
+			cb();
+		}
+	};
 	handleSubmit = e => {
 		e.preventDefault();
 		this.props.form.validateFields((err, values) => {
 			if (!err) {
 				console.log("Received values of form: ", values);
+				this.props.handleSubmit(values);
 			}
 		});
 	};
@@ -30,7 +53,7 @@ class SignUpForm extends React.Component {
 			<Form onSubmit={this.handleSubmit} className='login-form'>
 				<Row>
 					<Row type='flex' justify='center' align='middle' style={{ marginBottom: "10%" }}>
-						<img src='images/logo.svg' alt='logo' />
+						<img src='images/logo.svg' alt='logo' style={{ height: "150px" }} />
 					</Row>
 
 					<Row type='flex' justify='center' align='middle'>
@@ -43,20 +66,6 @@ class SignUpForm extends React.Component {
 						<Text>Enter your details to create your account: </Text>
 					</Row>
 
-					<Row type='flex' gutter={10}>
-						<Col span={9}>Contract number:</Col>
-						<Col>
-							<Text>34953745234 </Text>
-						</Col>
-					</Row>
-
-					<Row type='flex' gutter={10} style={{ marginBottom: "5%" }}>
-						<Col span={9}>Company name:</Col>
-						<Col>
-							<Text>Viking</Text>
-						</Col>
-					</Row>
-
 					<Row>
 						<Form.Item>
 							{getFieldDecorator("email", {
@@ -67,8 +76,19 @@ class SignUpForm extends React.Component {
 
 					<Row>
 						<Form.Item>
+							{getFieldDecorator("companyName", {
+								rules: [{ required: true, message: "Please input your company name!" }]
+							})(<Input size='large' placeholder='Company Name' />)}
+						</Form.Item>
+					</Row>
+
+					<Row>
+						<Form.Item>
 							{getFieldDecorator("phoneNumber", {
-								rules: [{ required: true, message: "Please input your phone number!" }]
+								rules: [
+									{ required: true, message: "Please input your phone number!" },
+									{ validator: this.isNumber }
+								]
 							})(<Input size='large' placeholder='Phone number' />)}
 						</Form.Item>
 					</Row>
@@ -84,7 +104,10 @@ class SignUpForm extends React.Component {
 					<Row>
 						<Form.Item>
 							{getFieldDecorator("confirmPasword", {
-								rules: [{ required: true, message: "Please input your password!" }]
+								rules: [
+									{ required: true, message: "Please input your password!" },
+									{ validator: this.confirmPassword }
+								]
 							})(<Input size='large' type='password' placeholder='Confirm Password' />)}
 						</Form.Item>
 					</Row>
@@ -127,7 +150,10 @@ class SignUpForm extends React.Component {
 						<Col offset={2} span={8}>
 							<Form.Item>
 								{getFieldDecorator("postcode", {
-									rules: [{ required: true, message: "Please input your postcode!" }]
+									rules: [
+										{ required: true, message: "Please input your postcode!" },
+										{ validator: this.isNumber }
+									]
 								})(<Input size='large' placeholder='Postcode/ZIP' />)}
 							</Form.Item>
 						</Col>
@@ -135,18 +161,21 @@ class SignUpForm extends React.Component {
 
 					<Row>
 						<Form.Item>
-							<Row type='flex' style={{ marginBottom: "10%" }}>
+							<Row type='flex'>
 								<Col>
 									{getFieldDecorator("remember", {
 										valuePropName: "checked",
-										initialValue: true
+										initialValue: false,
+										rules: [{ validator: this.confirmTerms }]
 									})(<Checkbox>I agree with the</Checkbox>)}
 								</Col>
 								<Link to='/signin' style={{ fontWeight: "bold" }}>
 									<Text style={{ fontWeight: "bold" }}>terms and conditions</Text>
 								</Link>
 							</Row>
-							<Row type='flex' justify='center' style={{ marginBottom: "10%" }}>
+						</Form.Item>
+						<Form.Item>
+							<Row type='flex' justify='center' style={{ marginBottom: "10%", marginTop: "10%" }}>
 								<Button type='primary' size='large' htmlType='submit'>
 									Sign Up
 								</Button>

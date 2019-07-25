@@ -12,7 +12,7 @@ class SignInPage extends Component {
 	componentDidMount() {}
 
 	handleSubmit = values => {
-		this.props.history.push("/");
+		this.props.requestSignIn(values);
 	};
 
 	render() {
@@ -30,9 +30,9 @@ const mapStateToProps = state => ({
 	auth: state.authentication
 });
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = dispatch => {
 	return {
-		requestSignIn
+		requestSignIn: payload => dispatch(requestSignIn(payload))
 	};
 };
 
